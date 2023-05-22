@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <title>Registro de Protocolo</title>
+</head>
+<body>
+    <h1>Registro de Protocolo</h1>
+    <form action="registrar_protocolo.php" method="POST">
+        <label for="numero">Número:</label>
+        <input type="number" name="numero" required><br><br>
+        
+        <label for="descricao">Descrição:</label>
+        <textarea name="descricao" rows="5" cols="40" required></textarea><br><br>
+        
+        <label for="prazo">Prazo (dias):</label>
+        <input type="number" name="prazo" required><br><br>
+        
+        <label for="id_demandante">Demandante:</label>
+        <select name="id" required>
+            <?php
+            // Conexão com o banco de dados
+            $con = mysqli_connect("localhost:3308", "root", "", "dbcad");
+            
+            // Consulta para obter todas as pessoas cadastradas
+            $query = "SELECT id, nome FROM cadastro";
+            $result = mysqli_query($con, $query);
+            
+            // Loop para exibir as opções de seleção
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<option value=\"" . $row['id'] . "\">" . $row['nome'] . "</option>";
+            }
+            
+            // Fechar a conexão com o banco de dados
+            mysqli_close($con);
+            ?>
+        </select><br><br>
+        
+        <input type="submit" value="Registrar">
+    </form>
+</body>
+</html>

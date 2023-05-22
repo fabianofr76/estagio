@@ -1,0 +1,28 @@
+comandos:
+
+create dbcad;
+
+use dbcad;
+
+create table cadastro(
+id int not null auto_increment primary key, 
+nome varchar(150) not null,
+logradoro varchar(70),
+numero int not null,
+complento varchar(50)
+bairro varchar(100)
+cidade varchar(100)
+cpf int not null,
+datadenasci date not null,
+sexo varchar(11)not null,
+senha int not null
+);
+create table protocolo(
+id bigint not null auto_increment primary key, 
+numero int not null,
+descricao varchar(30),
+data datetime not null,
+prazo double not null,
+id_demandante int not null,
+constraint fk_demandante foreign key(id_demandante) references cadastro(id)  
+);
